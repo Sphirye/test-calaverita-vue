@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 import es from 'vuetify/src/locale/es';
 
 Vue.use(Vuetify);
@@ -26,4 +27,7 @@ export default new Vuetify({
       locales: { es },
       current: 'es',
     },
+    icons: {
+      iconfont: 'fa'
+    }
 });
