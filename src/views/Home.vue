@@ -1,6 +1,6 @@
 <template>
-<div class="background">
-  <v-container :class="`${ darkTheme ? 'white--text' : 'black--text' }`">
+  <v-container :class="`${ $vuetify.breakpoint.lgAndUp ? 'background-lg' : 'background-md' }`" fluid>
+    <div :class="`${ darkTheme ? 'white--text' : 'black--text' } ${ $vuetify.breakpoint.mdAndDown ? 'content' : '' }`">
     <v-row class="text-h5 text-md-h4 py-5 no-wrap">
       <span class="mx-5 font-weight-bold">calaverita</span>
       <v-spacer/>
@@ -57,7 +57,7 @@
           <v-card-subtitle class="text-h5 grey--text text--darken-2 font-weight-medium">Los pasos para obtener la información</v-card-subtitle>
           <v-row>
             <v-col cols="6" v-for="(item, key) in steps" :key="key">
-              <v-icon x-large class="my-6" color="white">mdi-feather</v-icon>
+              <v-icon x-large class="my-6" :color="` ${ darkTheme ? 'white' : 'black'} `">{{item.icon}}</v-icon>
               <v-spacer/>
               <span :class="`text-h4 my-6 font-weight-bold ${darkTheme ? 'white--text' : 'black--text'}`">{{item.step}}</span>
               <p :class="`text-h6 my-6 font-weight-ligth grey--text darken--3 ${darkTheme ? 'white--text blue-grey darken-4' : 'grey--text text--darken-2'}`">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -66,8 +66,8 @@
         </v-card>
       </v-col>
     </v-row>
+    </div>
   </v-container>
-</div>
 </template>
 
 <script lang="ts">
@@ -99,10 +99,10 @@ export default class Home extends Vue {
   ]
 
   steps = [
-    { step: "Paso 1" },
-    { step: "Paso 2" },
-    { step: "Paso 3" },
-    { step: "Paso 4" }
+    { step: "Paso 1", icon: "fas fa-map-marker-alt" },
+    { step: "Paso 2", icon: "fas fa-camera" },
+    { step: "Paso 3", icon: "fas fa-cloud-upload-alt" },
+    { step: "Paso 4", icon: "far fa-file-alt" }
 
   ]
 }
@@ -110,9 +110,21 @@ export default class Home extends Vue {
 </script>
 
 <style>
-.background {
+.background-lg {
   background: url('../assets/klipartz.com.png') no-repeat !important;
-  background-position: 95% 25px !important;
-  background-size: cover;
+  background-position: 100% 25px !important;
 }
+
+.background-md {
+  background: url('../assets/klipartz.com.png') no-repeat !important;
+  background-position: center top !important;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .content {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
 </style>
