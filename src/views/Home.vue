@@ -1,14 +1,27 @@
 <template>
   <v-container>
-    <v-row no-gutters :class="`py-5  ${ darkTheme ? 'white--text' : 'black--text' } `">
+
+    <v-app-bar :class="`transparent ${darkTheme ? 'white--text' : 'black--text'}`" flat>
+      <v-toolbar-title>
         <span :class="`${subtitleSize()} font-weight-bold`">calaverita</span>
-        <v-spacer/>
+      </v-toolbar-title>
+
+      <v-spacer/>
+
+      <v-app-bar-nav-icon>
         <v-btn icon @click="darkTheme = !darkTheme">
-          <v-icon large>fas fa-sun</v-icon>
+          <v-icon :color="`${darkTheme ? 'white' : 'black'}`" large>{{ darkTheme ? "fas fa-sun" : "fas fa-moon"}}</v-icon>
         </v-btn>
-        <span :class="`mx-5 ${subtitleSize()}`">News</span>
+      </v-app-bar-nav-icon>
+
+      <v-toolbar-title>
         <span :class="`mx-5 ${subtitleSize()}`">Contact</span>
-    </v-row>
+      </v-toolbar-title>
+
+      <v-toolbar-title>
+        <span :class="`mx-5 ${subtitleSize()}`">News</span>
+      </v-toolbar-title>
+    </v-app-bar>
 
     <v-row no-gutters>
 
