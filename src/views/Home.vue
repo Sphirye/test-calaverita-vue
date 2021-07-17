@@ -1,8 +1,6 @@
 <template>
-  <v-container :class="`${ $vuetify.breakpoint.mdAndUp ? 'background-lg' : 'background-sm ma-0' }`">
-    <div :class="`${ darkTheme ? 'white--text' : 'black--text' } ${ $vuetify.breakpoint.smAndDown ? 'content' : '' }`">
-      
-      <v-row no-gutters class="py-5">
+  <v-container>
+    <v-row no-gutters :class="`py-5  ${ darkTheme ? 'white--text' : 'black--text' } `">
         <span :class="`${subtitleSize()} font-weight-bold`">calaverita</span>
         <v-spacer/>
         <v-btn icon @click="darkTheme = !darkTheme">
@@ -10,46 +8,42 @@
         </v-btn>
         <span :class="`mx-5 ${subtitleSize()}`">News</span>
         <span :class="`mx-5 ${subtitleSize()}`">Contact</span>
-      </v-row>
+    </v-row>
 
-      <v-row>
-        <div>
-          <v-col cols="7">
-            <v-sheet height="450px" class="transparent d-flex flex-column-reverse">
-              <p :class="` ${titleSize()} ${ darkTheme ? 'white--text' : 'black-text' }`">
-                <span class="font-weight-bold">Ayudándote</span> a obtener información sobre aves.
-              </p>
-            </v-sheet>
+    <v-row no-gutters>
 
-            <v-col cols="12" md="8">
-              <div class="d-flex">
-                <v-text-field style="min-width: 120px;" class="mr-12" hide-details="true" placeholder="Busca tu ave" outlined rounded :dark="darkTheme"></v-text-field>
-                <v-btn icon x-large class="indigo">
-                  <v-icon color="white">fas fa-search</v-icon>
-                </v-btn>
-              </div>
-            </v-col>
+        <v-col cols="7">
+          <v-sheet height="450px" class="transparent d-flex flex-column-reverse">
+            <p :class="` ${titleSize()} ${ darkTheme ? 'white--text' : 'black-text' }`">
+              <span class="font-weight-bold">Ayudándote</span> a obtener información sobre aves.
+            </p>
+          </v-sheet>
+          <v-col cols="12" md="8">
+            <div class="d-flex">
+              <v-text-field style="min-width: 120px;" class="mr-12" hide-details="true" placeholder="Busca tu ave" outlined rounded :dark="darkTheme"></v-text-field>
+              <v-btn icon x-large class="indigo">
+                <v-icon color="white">fas fa-search</v-icon>
+              </v-btn>
+            </div>
           </v-col>
+        </v-col>
+        
+        <v-row no-gutters :justify="`${ $vuetify.breakpoint.smAndDown ? 'center' : 'start' }`" class="my-16">
+          <v-col cols="12" sm="4" md="3" class="ma-2" v-for="(bird, key) in birds" :key="key">
+            <v-card :class="`pa-5 ${ darkTheme ? 'white--text blue-grey darken-4' : 'black--text white' }`" rounded="xl" width="100%">
+              <v-img :src="require(`@/assets/${bird.image}`)" width="200px" height="200px" contain class="ma-auto align-self-stretch"></v-img>
+              <v-card-title class="justify-center">Lorem Ipsum</v-card-title>
+              <v-card-subtitle class="text-center grey--text text--darken-2 body-1">Lorem ipsum dolor sit</v-card-subtitle>
+              <div class="mx-4">
+                <v-card-subtitle class="text-center grey--text body-2 pa-0">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod</v-card-subtitle>
+                <v-card-subtitle class="text-center blue--text text--accent-4 body-2 pa-0">Lorem ipsum dolor sit</v-card-subtitle>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+    </v-row>
 
-          <v-row no-gutters :justify="`${ $vuetify.breakpoint.smAndDown ? 'center' : 'start' }`" class="my-16">
-            <v-col cols="12" sm="4" md="3" class="ma-2" v-for="(bird, key) in birds" :key="key">
-
-              <v-card :class="`pa-5 ${ darkTheme ? 'white--text blue-grey darken-4' : 'black--text white' }`" rounded="xl" width="100%">
-                <v-img :src="require(`@/assets/${bird.image}`)" width="200px" height="200px" contain class="ma-auto align-self-stretch"></v-img>
-                <v-card-title class="justify-center">Lorem Ipsum</v-card-title>
-                <v-card-subtitle class="text-center grey--text text--darken-2 body-1">Lorem ipsum dolor sit</v-card-subtitle>
-                <div class="mx-4">
-                  <v-card-subtitle class="text-center grey--text body-2 pa-0">Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod</v-card-subtitle>
-                  <v-card-subtitle class="text-center blue--text text--accent-4 body-2 pa-0">Lorem ipsum dolor sit</v-card-subtitle>
-                </div>
-              </v-card>
-
-            </v-col>
-          </v-row>
-        </div>
-      </v-row>
-
-      <v-row no-gutters class="mt-16">
+    <v-row no-gutters class="mt-16">
         <v-col cols="12" sm="4">
           <v-img src="@/assets/bird_3.png"></v-img>
         </v-col>
@@ -59,7 +53,7 @@
             <v-card-title :class="` text-no-wrap font-weight-bold ${titleSize()} ${darkTheme ? 'white--text' : 'black--text'}`">Como funciona</v-card-title>
             <v-card-subtitle :class="` ${subtitleSize()}  grey--text text--darken-2 font-weight-medium`">Los pasos para obtener la información</v-card-subtitle>
             
-            <v-row>
+            <v-row no-gutters>
               <v-col cols="6" v-for="(item, key) in steps" :key="key">
                 <v-icon x-large class="my-6" :color="` ${ darkTheme ? 'white' : 'black'} `">{{item.icon}}</v-icon>
 
@@ -73,17 +67,16 @@
 
           </v-card>
         </v-col>
-      </v-row>
+    </v-row>
       
-    </div>
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import DefaultComponent from "@/components/DefaultComponent.vue"
-import UIModule from "@/store/UIModule";
-import { getModule } from "vuex-module-decorators";
+import { getModule } from "vuex-module-decorators"
+import UIModule from "@/store/UIModule"
 
 @Component({
   components: { DefaultComponent }
@@ -151,22 +144,3 @@ export default class Home extends Vue {
 }
 
 </script>
-
-<style>
-.background-lg {
-  background: url('../assets/klipartz.com.png') no-repeat !important;
-  background-position: 100% 25px !important;
-}
-
-.background-sm {
-  background: url('../assets/klipartz.com.png') no-repeat !important;
-  background-position: center top !important;
-}
-
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .content {
-    backdrop-filter: blur(10px);
-  }
-}
-
-</style>
